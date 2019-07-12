@@ -1,12 +1,11 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
 import Dot from './components/Dot/Dot'
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text style={styles.colorWhite}>Hello World!</Text>
-      <Dot></Dot>
+      <Dot width={Math.round(Dimensions.get('window').width)} height={Math.round(Dimensions.get('window').height)} minSize={100}></Dot>
     </View>
   );
 }
