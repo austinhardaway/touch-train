@@ -2,8 +2,33 @@ import React, { Component } from 'react'
 import { TouchableOpacity , Dimensions} from 'react-native'
 import styles from './styles'
 
+const colorList = [
+    'white',
+    'pink',
+    'purple',
+    'blue',
+    'yellow',
+    'green',
+    'red',
+    'crimson',
+    'darkgoldenrod',
+    'aqua',
+    'deeppink'
+]
 
 export default class Dot extends Component{
+
+    constructor(props){
+        super(props)
+        console.log('props', this.props)
+        this.state =  {
+            size: this.props.startingSize,
+            successfulTouches: 0,
+            top:50,
+            left:48.4,
+            dotColor: 'white'
+        }
+    }
     
     computeNewBounds(){
         return {
@@ -29,7 +54,13 @@ export default class Dot extends Component{
     }
 
     onDotPress(){
-        if(this.state.successfulTouches!==0 && this.state.successfulTouches%3===0){
+        if(this.props.colors){
+            this.setState(prev =>({
+                dotColor: colorList[Math.floor(Math.random()*colorList.length)]
+            }))
+            console.log('color = ', this.state.dotColor)
+        }
+        if(this.props.dotMoves && this.state.successfulTouches!==0 && this.state.successfulTouches%this.props.tapsPerMove===0){
             let newPos = this.getNewPos()
             this.setState(prev => 
                 ({
@@ -47,14 +78,6 @@ export default class Dot extends Component{
             )
         }
         console.log('Number of successful touches: ', this.state.successfulTouches)
-        console.log(this.props.height, this.props.width)
-    }
-
-    state = {
-        size: 470,
-        successfulTouches: 0,
-        top:50,
-        left:48.4
     }
 
     render() {

@@ -5,7 +5,7 @@ import { StyleSheet } from 'react-native'
 function getStyle(state){
     return StyleSheet.create({
         buttonStyle : {
-            backgroundColor: 'white',
+            backgroundColor: state.dotColor,
             borderRadius: state.size,
             height: state.size,
             width: state.size,
